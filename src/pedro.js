@@ -10,20 +10,26 @@ module.exports = class Pedro {
     let x = this.Game.player.getX();
     let y = this.Game.player.getY();
 
-    const passableCallback = (x, y) => (x + "," + y in this.Game.map);
+    const passableCallback = (x, y) => x + "," + y in this.Game.map;
     // Activation object for the callback
-    const astar = new ROT.Path.AStar(x, y, passableCallback.bind(this), { topology: 4 });
+    const astar = new ROT.Path.AStar(x, y, passableCallback.bind(this), {
+      topology: 4
+    });
     const path = [];
     const pathCallback = (x, y) => {
       path.push([x, y]);
-    }
+    };
     astar.compute(this._x, this._y, pathCallback);
     path.shift(); /* remove Pedro's position */
 
-    if (path.length > 1) {      
+    if (path.length > 1) {
       x = path[0][0];
       y = path[0][1];
-      this.Game.display.draw(this._x, this._y, this.Game.map[this._x + "," + this._y]);
+      this.Game.display.draw(
+        this._x,
+        this._y,
+        this.Game.map[this._x + "," + this._y]
+      );
       this._x = x;
       this._y = y;
       this._draw();
@@ -36,5 +42,4 @@ module.exports = class Pedro {
   _draw() {
     this.Game.display.draw(this._x, this._y, "P", "red");
   }
-
-}
+};

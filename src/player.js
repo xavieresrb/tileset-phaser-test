@@ -3,26 +3,41 @@ module.exports = class Player {
     this._x = x;
     this._y = y;
     this.Game = Game;
-    this.sprite = this.Game.game.add.sprite((this._x) * 32, (this._y -1) * 32, 'Player'); 
+    this.sprite = this.Game.game.add.sprite(
+      this._x * 32,
+      (this._y - 1) * 32,
+      "Player"
+    );
   }
 
-  getX() { return this._x };
-  getY() { return this._y };
+  getX() {
+    return this._x;
+  }
+  getY() {
+    return this._y;
+  }
 
-  _draw() {    
-  this.sprite.x = (this._x)  * 32;
-  this.sprite.y = (this._y - 1)  * 32  
-};
+  _draw() {
+    this.sprite.x = this._x * 32;
+    this.sprite.y = (this._y - 1) * 32;
+  }
 
   move(x, y) {
     const newX = this._x + x;
     const newY = this._y + y;
-    this.Game.game.debug.text(`previous: x:${this._x}, y:${this._y} current: x:${newX}, y: ${newY}`, 10, 10, 'red');     
+    this.Game.game.debug.text(
+      `previous: x:${this._x}, y:${this._y} current: x:${newX}, y: ${newY}`,
+      10,
+      10,
+      "red"
+    );
     const newKey = newX + "," + newY;
-    
-    if (!(newKey in this.Game.mapCoordinates)) { return; } 
-  
-   //  this.Game.display.draw(this._x, this._y, this.Game.mapCoordinates[this._x + "," + this._y]);
+
+    if (!(newKey in this.Game.mapCoordinates)) {
+      return;
+    }
+
+    //  this.Game.display.draw(this._x, this._y, this.Game.mapCoordinates[this._x + "," + this._y]);
     this._x = newX;
     this._y = newY;
     this._draw();
@@ -78,4 +93,4 @@ module.exports = class Player {
     window.removeEventListener("keydown", this);
     this.Game.engine.unlock();
 }*/
-}
+};

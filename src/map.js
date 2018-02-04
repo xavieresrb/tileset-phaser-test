@@ -1,17 +1,19 @@
-const ROT = require('../modules/rot');
+const ROT = require("../modules/rot");
 
 const generateCoordinatesMap = () => {
   const result = {};
-  const digger = new ROT.Map.Digger(60, 40);
+  const digger = new ROT.Map.Digger(60, 30);
   const digCallback = (x, y, value) => {
-    if (value) { return; } 
+    if (value) {
+      return;
+    }
     const key = x + "," + y;
     result[key] = ".";
-  }
+  };
   digger.create(digCallback.bind(this));
-  return result; 
-}
+  return result;
+};
 
 module.exports = {
   generateCoordinatesMap
-}
+};

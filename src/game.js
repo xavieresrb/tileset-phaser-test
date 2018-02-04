@@ -56,7 +56,7 @@ module.exports = class Game {
     };
 
     Game.Boot.prototype._createBeing = function(what, freeCells) {
-      const index = Math.floor(ROT.RNG.getUniform() * freeCells.length);
+      const index = Phaser.Math.between(1, freeCells.length);
       const key = freeCells.splice(index, 1)[0];
       const parts = key.split(",");
       const x = parseInt(parts[0]);
