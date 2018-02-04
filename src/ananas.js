@@ -1,4 +1,6 @@
 const Player = require("./src/player.js");
+const { toCoordinates } = require("./src/utils");
+const { generateCoordinatesMap } = require("./src/map");
 
 Game.Ananas = function(game) {
   this.numpad = {
@@ -19,17 +21,31 @@ Game.Ananas.prototype = {
   _createBeing: function(what, freeCells) {
     const index = Phaser.Math.between(1, freeCells.length);
     const key = freeCells.splice(index, 1)[0];
-    const parts = key.split(",");
-    const x = parseInt(parts[0]);
-    const y = parseInt(parts[1]);
+    const { x, y } = toCoordinates(key);
 
     return new what(this, x, y);
   },
+
+  _generateBoxes: function(freeCells) {
+    for (let i = 0; i < 10; i++) {
+      const index = Phaser.Math.between(0, freeCells.length - 1);
+      const key = freeCells.splice(index, 1)[0];
+      const { x, y } = toCoordinates(key);
+      const sprite = this.game.add.sprite(x * 32, y * 32, "Box");
+      sprite.scale.setTo(2, 2);
+
+      if (i === 0) {
+        this.ananas = key;
+      }
+    }
+  },
+
   preload: function() {
     this.load.image("sci-fi-tiles", "assets/sci-fi-tiles.png");
     this.load.image("ground_1x1", "assets/ground_1x1.png");
     this.load.spritesheet("Player", "assets/player.png", 32, 48);
     this.load.image("Pedro", "assets/pedro.png");
+    this.load.image("Box", "assets/star.png");
   },
   create: function() {
     this.game.stage.backgroundColor = "#2d2d2d";
@@ -42,9 +58,7 @@ Game.Ananas.prototype = {
     this.floorLayer = this.map.create("floorLayer", 60, 40, 32, 32);
 
     for (let key in this.mapCoordinates) {
-      const parts = key.split(",");
-      const x = parseInt(parts[0]);
-      const y = parseInt(parts[1]);
+      const { x, y } = toCoordinates(key);
 
       this.map.putTile(0, x, y, this.floorLayer);
     }
@@ -61,6 +75,8 @@ Game.Ananas.prototype = {
     this.numpad.w.event = this.game.input.keyboard.addKey(
       Phaser.Keyboard.NUMPAD_4
     );
+
+    this._generateBoxes(Object.keys(this.mapCoordinates));
 
     this._placeActors();
 
