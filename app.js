@@ -1,11 +1,13 @@
-const Game = require("./src/game.js");
-
-const nwContext = require("./src/nw-context.js");
+var Game = {
+  _WIDTH: 320,
+  _HEIGTH: 400
+};
 
 loadApp = function() {
-  const game = new Game();
+  var game = new Phaser.Game(2048, 1024, Phaser.AUTO, "game");
+  game.state.add("Game", Game.Ananas);
+  game.state.start("Game");
 
-  game.init();
-
-  nwContext.maximize();
+  const win = nw.Window.get();
+  win.maximize();
 };

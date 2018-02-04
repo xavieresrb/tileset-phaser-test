@@ -1,5 +1,3 @@
-const ROT = require("../modules/rot");
-
 const generateCoordinatesMap = () => {
   const result = {};
   const digger = new ROT.Map.Digger(60, 30);
