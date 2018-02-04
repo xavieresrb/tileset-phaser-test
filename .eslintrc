@@ -1,0 +1,17 @@
+{
+  "extends": ["airbnb-base", "prettier"],
+  "rules": {
+    "import/no-dynamic-require": 0,
+    "global-require": 0,
+    "no-param-reassign": 0,
+    "consistent-return": 0,
+    "no-plusplus": 0,
+    "no-underscore-dangle": 0,
+    "object-shorthand": 0,
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/valid-expect": "error"
+  }
+}
+
