@@ -1,6 +1,6 @@
 {
   "name": "tileset.phaser",
-  "main": "index.html",
+  "main": "indexhw.html",
   "scripts": {
     "start": "nw . --mixed-context",
     "debug": "nw . --mixed-context --remote-debugging-port=9222"

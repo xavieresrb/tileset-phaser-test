@@ -4,10 +4,13 @@ var Game = {
 };
 
 loadApp = function() {
-  var game = new Phaser.Game(2048, 1024, Phaser.AUTO, "game");
+  
+  var game = new Phaser.Game(1024, 600, Phaser.AUTO, "game");
+  
   game.state.add("Game", Game.Ananas);
+  
   game.state.start("Game");
 
   const win = nw.Window.get();
-  win.maximize();
+  // win.maximize();
 };
